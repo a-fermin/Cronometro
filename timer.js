@@ -9,10 +9,12 @@ function setTimer() {
     seconds = parseInt(document.getElementById('seconds').value) || 0;
     totalSeconds = hours * 3600 + minutes * 60 + seconds;
     displayTime(totalSeconds);
+    showTimer();
 }
 
 function startTimer() {
     clearInterval(interval);
+    showTimer();
     interval = setInterval(function() {
         totalSeconds--;
         if (totalSeconds <= 0) {
@@ -23,10 +25,6 @@ function startTimer() {
     }, 1000);
 }
 
-function stopTimer() {
-    clearInterval(interval);
-}
-
 function displayTime(totalSeconds) {
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
@@ -34,6 +32,11 @@ function displayTime(totalSeconds) {
 
     document.getElementById('timer').innerText = 
         `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
+function showTimer() {
+    const timerDisplay = document.getElementById('timer');
+    timerDisplay.style.display = 'block';
 }
 
 // Initialize display with default value
